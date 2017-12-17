@@ -1,0 +1,58 @@
+service: whosn-api
+
+frameworkVersion: "=1.24.1"
+
+provider:
+  name: aws
+  region: us-east-1
+  runtime: nodejs6.10
+  iamRoleStatements:
+  - Effect: Allow
+    Action:
+      - dynamodb:DescribeTable
+      - dynamodb:Query
+      - dynamodb:Scan
+      - dynamodb:GetItem
+      - dynamodb:PutItem
+      - dynamodb:UpdateItem
+      - dynamodb:DeleteItem
+    Resource: "arn:aws:dynamodb:us-east-1:*:*"
+
+environment:
+   events-table: "Events"
+
+functions:
+  # create:
+  #   handler: events.create
+  #   events:
+  #        - http:
+  #            path: events
+  #            method: post
+  list:
+    handler: events/list.list
+    events:
+         - http:
+             path: events
+             method: get
+  get:
+    handler: events/get.get
+    events:
+         - http:
+             path: events/{id}
+             method: get
+  # update:
+  #   handler: handler.update
+  #   events:
+  #        - http:
+  #            path: events/{id}
+  #            method: put
+  # delete:
+  #   handler: handler.delete
+  #   events:
+  #        - http:
+  #            path: events/{id}
+  #            method: delete
+
+
+plugins:
+  - serverless-offline
