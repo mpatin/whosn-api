@@ -11,3 +11,8 @@ $ serverless create --template aws-nodejs --path whosn-api
 Emulate AWS λ and API Gateway locally when developing your Serverless project
 https://github.com/dherault/serverless-offline
 npm install serverless-offline --save-dev
+
+
+https://hackernoon.com/a-crash-course-on-serverless-with-node-js-632b37d58b44
+
+https://node.university/blog/1176932/aws-serverless

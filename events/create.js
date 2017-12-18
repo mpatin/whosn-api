@@ -1,40 +1,33 @@
+'use strict';
 
-module.exports.list = (event, context, callback) => {
-  const params = {
-    TableName: 'Events'
-  };
-  
-  var id = randomstring.generate({
-    length: 3,
-    capitalization: 'lowercase'
-  });
-  var key = randomstring.generate({
-    length: 12,
-    capitalization: 'lowercase'
-  });
+const uuid = require('uuid');
+const AWS = require('aws-sdk');
+
+AWS.config.update({region: 'us-east-1'});
+
+const dynamoDb = new AWS.DynamoDB.DocumentClient();
+
+module.exports.create = (event, context, callback) => {
+  const timestamp = new Date().getTime();
+  const body = JSON.parse(event.body);
 
   var params = {
     TableName: 'Events',
     Item: {
-      'id': id,
-      'key': key,
-      'name': req.body.name,
-      'location': req.body.location,
-      'date': req.body.date,
-      'time': req.body.hour + ':' + req.body.min + '' + req.body.ampm,
-      'hour': req.body.hour,
-      'min' : req.body.min,
-      'ampm' : req.body.ampm,
-      'creator': req.body.creator,
-      // 'email': req.body.email,
-      'participants': [{
-        'name': req.body.creator,
-        'io': 'In'
-      }]
+      id: uuid.v1(),
+      createdAt: timestamp,
+      updatedAt: timestamp,
+      name: body.name,
+      location: body.location,
+      date: body.date,
+      hour: body.hour,
+      min: body.min,
+      ampm: body.ampm,
+      creator: body.creator,
     }
   };
 
-  // write the todo to the database
+  // write to the database
   dynamoDb.put(params, (error) => {
   // handle potential errors
   if (error) {
@@ -49,10 +42,10 @@ module.exports.list = (event, context, callback) => {
 
   // create a response
   const response = {
-    statusCode: 200,
+    statusCode: 201,
     body: JSON.stringify(params.Item),
   };
   callback(null, response);
   });
 
-});
+};

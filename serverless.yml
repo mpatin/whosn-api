@@ -22,12 +22,12 @@ environment:
    events-table: "Events"
 
 functions:
-  # create:
-  #   handler: events.create
-  #   events:
-  #        - http:
-  #            path: events
-  #            method: post
+  create:
+    handler: events/create.create
+    events:
+         - http:
+             path: events
+             method: post
   list:
     handler: events/list.list
     events:

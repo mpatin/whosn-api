@@ -1,12 +1,13 @@
 'use strict';
 
 const AWS = require('aws-sdk');
+AWS.config.update({region: 'us-east-1'});
 
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 
 module.exports.list = (event, context, callback) => {
   const params = {
-    TableName: 'Events'
+    TableName: 'Events',
   };
 
   dynamoDb.scan(params, (error, result) => {
