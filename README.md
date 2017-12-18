@@ -16,3 +16,5 @@ npm install serverless-offline --save-dev
 https://hackernoon.com/a-crash-course-on-serverless-with-node-js-632b37d58b44
 
 https://node.university/blog/1176932/aws-serverless
+
+https://github.com/serverless/examples/tree/master/aws-node-rest-api-with-dynamodb

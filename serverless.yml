@@ -40,12 +40,12 @@ functions:
          - http:
              path: events/{id}
              method: get
-  # update:
-  #   handler: handler.update
-  #   events:
-  #        - http:
-  #            path: events/{id}
-  #            method: put
+  update:
+    handler: events/update.update
+    events:
+         - http:
+             path: events/{id}
+             method: put
   # delete:
   #   handler: handler.delete
   #   events:
