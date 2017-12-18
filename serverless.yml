@@ -46,12 +46,12 @@ functions:
          - http:
              path: events/{id}
              method: put
-  # delete:
-  #   handler: handler.delete
-  #   events:
-  #        - http:
-  #            path: events/{id}
-  #            method: delete
+  delete:
+    handler: events/delete.delete
+    events:
+         - http:
+             path: events/{id}
+             method: delete
 
 
 plugins:
